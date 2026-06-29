@@ -5,7 +5,7 @@
    - Compares actual vs estimate (custom field) and vs due date
    - No server: everything is computed in-browser on open
    ========================================================= */
-var APP_KEY = "7afe3089ed59ea88b6442475d66909f4";
+var APP_KEY = "REPLACE_WITH_YOUR_TRELLO_API_KEY";
 var API = "https://api.trello.com/1";
 
 var t = window.TrelloPowerUp.iframe({ appKey: APP_KEY, appName: "TeamPulse" });
@@ -78,8 +78,11 @@ async function fetchCustomFields(boardId, token) {
 async function build(cfg) {
   var board = await t.board("id", "name", "members");
   var lists = await t.lists("id", "name");
-  var cards = await t.cards("id", "name", "idList", "idMembers", "due", "customFieldItems");
   var token = await t.getRestApi().getToken();
+  var cardsRes = await fetch(API + "/boards/" + board.id +
+    "/cards?fields=id,name,idList,idMembers,due&customFieldItems=true&key=" + APP_KEY + "&token=" + token);
+  if (!cardsRes.ok) throw new Error("Cards API " + cardsRes.status);
+  var cards = await cardsRes.json();
 
   var inProg = {}, done = {};
   cfg.inProgressListIds.forEach(function (id) { inProg[id] = true; });
