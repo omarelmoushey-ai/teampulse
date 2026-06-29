@@ -5,7 +5,7 @@
    - Compares actual vs estimate (custom field) and vs due date
    - No server: everything is computed in-browser on open
    ========================================================= */
-var APP_KEY = "REPLACE_WITH_YOUR_TRELLO_API_KEY";
+var APP_KEY = "7afe3089ed59ea88b6442475d66909f4";
 var API = "https://api.trello.com/1";
 
 var t = window.TrelloPowerUp.iframe({ appKey: APP_KEY, appName: "TeamPulse" });
