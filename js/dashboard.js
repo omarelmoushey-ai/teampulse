@@ -288,7 +288,6 @@ function render() {
 
   drawCharts(per, onTimeN, dueTasks.length - onTimeN);
   drawTable(per);
-  t.sizeTo("body");
 }
 
 function kpi(id, items) {
